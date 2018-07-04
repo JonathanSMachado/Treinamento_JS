@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercícios</title>
+    <style>
+        #content {
+            padding: 30px 0px 30px 0px
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exercícios HTML</h1>
+    </header>
+    <nav>
+        <a href wm-nav="exercicios/teste.html">00 - Teste</a> |
+        <a href wm-nav="exercicios/teste1.html">01 - Teste1</a> |
+        <a href wm-nav="exercicios/teste2.html">02 - Teste2</a> |
+        <a href wm-nav="exercicios/listas.html">03 - Listas</a> |
+        <a href wm-nav="exercicios/listaAninhada.html">03 - Lista Aninhada</a> |
+    </nav>
+    <section id="content">
+        <!-- conteúdo aqui -->
+    </section>
+    <footer>
+        Curso Web Moderno Udemy
+    </footer>
+
+    <script>
+        document.querySelectorAll('[wm-nav]').forEach(link => {
+            const content = document.getElementById('content')
+
+            link.onclick = function(e) {
+                e.preventDefault()
+
+                fetch(link.getAttribute('wm-nav'))
+                    .then(response => response.text())
+                    .then(html => content.innerHTML = html)
+            }
+        })
+    </script>
+</body>
+</html>

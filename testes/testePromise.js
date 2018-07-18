@@ -82,3 +82,9 @@ function resolveShares(func, lists) {
         func(handleResponse, lists)
     });
 }
+
+//primeiro devemos tentar efetivar a remoção dos compartilhamentos, se tiver remoção, para liberar a quantidade utilizada da feature
+//depois tentar adicionar novos. Com isso, possibilitamos ao usuário que remova e inclua no mesmo processo
+
+//devemos controlar a quantidade de compartilhamentos que o usuário pode adicionar, nao bloquando o botão novo
+//devemos permitir o usuário adicionar novos e caso tenha estourado o limite, mostrar mensagem ao mesmo

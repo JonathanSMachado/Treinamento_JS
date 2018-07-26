@@ -1,0 +1,66 @@
+<div wm-slider>
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem1.jpg" 
+             alt="Muro da cidade" 
+             width="513" 
+             height="342"
+             title="Muro da cidade">
+    </p>
+    
+    <p>
+        <img src="http://files.cod3r.com.br/curso-web/imagem2.gif" 
+             alt="Intro cod3r"
+             height="342">
+    </p>
+    
+    
+    <p class="circular">
+        <img src="http://files.cod3r.com.br/curso-web/imagem3.png" 
+        alt="Rio de Janeiro"
+        height="342">
+    </p>
+    
+    <p class="texto">
+        <img src="http://files.cod3r.com.br/curso-web/avatar.jpg" 
+        alt="Avatar" height="50" align="left">
+        Texto
+    </p>
+    
+    <p class="cidade"></p>
+    
+    <p>
+        <picture>
+            <source srcset="http://files.cod3r.com.br/curso-web/logo-larga.png"
+            media="(min-width: 600px)">
+            <img src="http://files.cod3r.com.br/curso-web/logo-estreita.png" alt="">
+        </picture>
+    </p>
+</div>
+
+<style>
+    .circular {
+        width: 513px;
+        background-color: #444444;
+    }
+
+    .texto {
+        width: 400px;
+    }
+
+    .texto img {
+        margin: 0px 12px 2px 0xp;
+    }
+
+    .cidade {
+        width: 513px;
+        height: 342px;
+        background-image: url("http://files.cod3r.com.br/curso-web/imagem4.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    p {
+        position: absolute;
+        display: none;
+    }
+</style>

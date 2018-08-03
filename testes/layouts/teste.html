@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>dialog demo</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style>
+        .ui-dialog .ui-dialog-titlebar-help {
+            position:absolute;
+            right:1.5em;
+            top:50%;
+            width:20px;
+            margin:-10px 0 0 0;
+            padding:1px;
+            height:20px;
+        }
+  </style>
+</head>
+<body>
+    <div class="dialog"></div>
+ 
+    <script>
+        $( ".dialog" ).dialog({
+            autoOpen: true,
+            height: 200,
+            width: 300,
+            modal: true,
+            dialogClass: 'dialog',
+            open: function(){
+                //alert('open');
+            }
+        });
+
+        $(".dialog")
+            .children(".ui-dialog-titlebar")
+            .append("<button id='btnHelp' class='ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-help' type='button' role='button' title='Help'><span class='ui-button-icon-primary ui-icon ui-icon-help'></span><span class='ui-button-text'>Help</span></button>");
+
+        $("#btnHelp")
+            .hover(function () {
+                $(this).addClass('ui-state-hover');
+            }, function () {
+                $(this).removeClass('ui-state-hover');
+            })
+            .click(function (e) {
+                alert('Help');
+                return false;
+            });
+    </script>
+ 
+</body>
+</html>

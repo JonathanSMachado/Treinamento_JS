@@ -64,3 +64,20 @@
         display: none;
     }
 </style>
+
+<script>
+    function moveElement(element, startPosition, endPosition, step, callback) {
+        const newPosition = startPosition - step;
+
+        if(newPosition >= endPosition) {
+            element.style.left = newPosition + 'px';
+            setTimeout(() => moveElement(element, newPosition, endPosition, step, callback), 7)
+        } else {
+            callback()
+        }
+    }
+
+    const p = document.querySelector('[wm-slider] > p')
+    p.style.display = 'block'
+    moveElement(p, 1500, -520, 5, () => console.log('ok'))
+</script>

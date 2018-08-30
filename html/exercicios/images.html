@@ -77,7 +77,36 @@
         }
     }
 
-    const p = document.querySelector('[wm-slider] > p')
-    p.style.display = 'block'
-    moveElement(p, 1500, -520, 5, () => console.log('ok'))
+    //const p = document.querySelector('[wm-slider] > p')
+    //p.style.display = 'block'
+    //moveElement(p, 1500, -520, 5, () => console.log('ok'))
+
+    function slide() {
+        const elements = document.querySelectorAll('[wm-slider] > p')
+        const elementsArray = Array.from(elements)
+        showSlide(elementsArray, elementsArray[0])
+    }
+
+    function showSlide(elements, actualElement) {
+        actualElement.style.display = 'block'
+
+        const start = innerWidth
+        const end = -actualElement.clientWidth
+
+        actualElement.style.left = `${start}px`
+
+        moveElement(actualElement, start, end, 5, () => {
+            actualElement.style.display = 'none'
+            showSlide(elements, getNextElement(elements, actualElement))
+        })
+
+    }
+
+    function getNextElement(elements, actualElement) {
+        const nextIndex = elements.indexOf(actualElement) + 1
+        
+        return nextIndex < elements.length ? elements[nextIndex] : elements[0]
+    }
+
+    slide()
 </script>

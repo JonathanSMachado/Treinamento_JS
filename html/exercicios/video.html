@@ -1,0 +1,62 @@
+<video id="meuVideo" width="800" height="450" controls autoplay controlsList='nodownload'>
+    <source src="http://files.cod3r.com.br/curso-web/video.mp4" type="video/mp4">
+    Seu browser não suporta a tag vídeo
+</video>
+
+<div wm-progress="meuVideo" class="progress">
+    <div></div>
+</div>
+
+<div>
+    <button wm-play="meuVideo">Play</button>
+    <button wm-pause="meuVideo">Pause</button>
+</div>
+
+<style>
+    .progress {
+        height: 20px;
+        width: 500px;
+        border: solid 1px #444444;
+        margin: 20px;
+    }
+
+    .progress > div {
+        background-color: red;
+        color: #ffffff;
+        height: 100%;
+        text-align: center;
+        font-size: 14px;
+    }
+</style>
+
+<script>
+
+    function initProgressBar(video) {
+        const div = document.querySelector(`[wm-progress=${video.id}] > div`)
+
+        setInterval(() => {
+            const percentual = (video.currentTime / video.duration) * 100
+            div.style.width = `${percentual}%`
+            div.innerHTML = `${percentual.toFixed(1)}%`
+        }, 200)
+    }
+
+    function initControls(video) {
+        document.querySelector(`[wm-play=${video.id}]`).onclick = () => video.play()
+        document.querySelector(`[wm-pause=${video.id}]`).onclick = () => video.pause()
+    }
+
+    function disableContextMenu(video) {
+        video.oncontextmenu = () => false
+    }
+    
+    function initializeVideo(id){
+        const video = document.getElementById(id)
+        
+        disableContextMenu(video)
+        initControls(video)
+        initProgressBar(video)
+    }
+  
+    initializeVideo('meuVideo')
+</script>

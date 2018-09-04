@@ -13,10 +13,11 @@ const p1 = new Pessoa("Jonathan")
 p1.falar()
 
 //Factory Function
-const criarPessoa = function(nome) {
+function criarPessoa(nome) {
+    let n = nome
     return {
         falar: function() {
-            console.log(`Olá ${nome}. Fui criado por uma 'Factory Function'`)
+            console.log(`Olá ${n}. Fui criado por uma 'Factory Function'`)
         }
     }
 }
@@ -25,12 +26,12 @@ const p2 = criarPessoa("Jony")
 p2.falar()
 
 //Constructor Function
-function criar(nome) {
-    
+function Criar(nome) {
+    let n = nome
     this.falar = function() {
-        console.log(`Olá ${nome}. Fui criado por uma 'Constructor Function'`)
+        console.log(`Olá ${n}. Fui criado por uma 'Constructor Function'`)
     }
 }
 
-const p3 = new criar("Jon")
+const p3 = new Criar("Jon")
 p3.falar()

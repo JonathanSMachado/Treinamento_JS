@@ -1,3 +1,4 @@
+/*
 const fetch = require('node-fetch')
 
 //Promise
@@ -27,3 +28,43 @@ async function getPersonA(id) {
 
 getPersonA(1)
     .then(person => console.log(`Personagem obtido com Async/Await retornando Promise: ${person.name}`))
+
+*/
+
+function varBlockScope() {
+    var x = 31
+
+    if(true) {
+        var x = 71
+        console.log(x)
+    }
+
+    console.log(x)
+}
+
+function varClosureBlockScope() {
+    var x = 31;
+
+    (function(){
+        //if(true){
+            var x = 71
+            console.log(`Teste ${x}`)
+        //}
+    })()
+
+    console.log(x)
+}
+
+function letScope() {
+    let x = 31
+
+    if(true) {
+        let x = 71
+        console.log(x)
+    }
+    console.log(x)
+}
+
+varBlockScope()
+varClosureBlockScope()
+letScope()

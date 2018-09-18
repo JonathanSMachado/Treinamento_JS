@@ -6,16 +6,62 @@
     <title>Flexbox #02</title>
     <link rel="stylesheet" href="css/tag.css">
     <style>
-        /* ... */
+        div {
+            font-size: 40px;
+            border: solid 5px aquamarine;
+        }
+
+        .flex-container div {
+            box-sizing: border-box;
+        }
+
+        .flex-container {
+            display: flex;
+            height: 300px;
+            width: 100%;
+        }
+
+        .flex-container div:nth-child(3) {
+            background-color: indianred;
+            /* order: 1; */
+            order: 0; /* padrão */
+            /* order: -1; */
+            /* align-self: center; */
+            /* align-self: flex-end; */
+            /* align-self: flex-start; */
+            align-self: stretch; /* padrão */
+        }
+
+        .flex-container div {
+            width: 100px;
+            /* distribui o tamanho restante do obj pai para os objs filhos, aplicando um peso */
+            flex-grow: 0; /* padrão */
+            flex-grow: 1; /* peso igual para todas as divs */
+        }
+
+        .flex-container div:first-child {
+            flex-grow: 3; /* peso maior para a primeira div */
+        }
+
+        /* .flex-container {
+            width: 300px;
+            flex-shrink: 1;
+        }
+
+        .flex-container div:last-child {
+            flex-shrink: 5;
+        } */
+
+
     </style>
 </head>
 
 <body>
-    <div class="flex-container tag nolabel">
-        <div class="tag nolabel">1</div>
-        <div class="tag nolabel">2</div>
-        <div class="tag nolabel">3</div>
-        <div class="tag nolabel">4</div>
+    <div class="flex-container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
     </div>
     <script src="js/tag.js"></script>
 </body>

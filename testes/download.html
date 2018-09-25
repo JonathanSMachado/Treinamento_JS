@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <span id="text-to-download">Sou um texto para download</span>
+
+    <script>
+        function download(content, fileName) {
+            
+            const file = new File([content], 'teste', {type: 'application/cmd'})
+            
+            const url = window.URL.createObjectURL(file)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = fileName
+            a.click()
+        }
+
+        
+        const textToDownload = document.getElementById('text-to-download').innerHTML
+        
+    </script>
+</body>
+</html>

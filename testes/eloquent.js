@@ -87,3 +87,54 @@ function countChar(string, charToCount) {
 // console.log(countChar('kakkerlak', 'a'))
 
 // ***********************************************
+function range(start, end) {
+    let arr = []
+    
+    let control = start;
+    
+    while(control <= end) {
+        arr.push(control)
+        control++
+    }
+    
+    return arr
+}
+
+function sum(arr) {
+    let sum = 0
+    arr.forEach(element => {
+        sum = sum + element
+    });
+    
+    return sum
+}
+
+// console.log(sum(range(1,10)))
+
+function reverseArray(arr) {
+    let arrReverse = []
+
+    for(let i = 0; i < arr.length; i++) {
+        arrReverse.unshift(arr[i])
+    }
+
+    return arrReverse
+}
+
+function reverseArrayInPlace(arr) {
+    let aux = Math.floor(arr.length/2)
+    
+    for(let i = 0; i <= aux; i++) {
+        let elem = arr[arr.length - 1 - i]
+        arr[arr.length - 1 - i] = arr[i]
+        arr[i] = elem
+    }
+}
+
+// console.log(reverseArray([1,2,3]))
+
+// var arr = [5,6,7, 8, 9, 10]
+// reverseArrayInPlace(arr)
+// console.log(arr)
+
+// ***********************************************

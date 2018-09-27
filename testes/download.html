@@ -8,21 +8,52 @@
 </head>
 <body>
     <span id="text-to-download">Sou um texto para download</span>
+    <button onclick="download()">DOWN</button>
 
+    <script id="jszip" src="js/jszip.min.js"></script>
     <script>
-        function download(content, fileName) {
+        function download() {
+            const zip = new JSZip();
+            const textToDownload = document.getElementById('text-to-download').innerHTML
             
-            const file = new File([content], 'teste', {type: 'application/cmd'})
+            zip.file("import.cmd", textToDownload) //configura file
             
-            const url = window.URL.createObjectURL(file)
-            const a = document.createElement('a')
-            a.href = url
-            a.download = fileName
-            a.click()
+            if (JSZip.support.blob){
+                zip.generateAsync({type: 'blob'}) //gera arquivo
+                    .then(function(data){
+                        // const url = window.URL.createObjectURL(data)
+                        // const a = document.createElement('a')
+                        // a.href = url
+                        // a.download = 'TaticView.zip'
+                        // a.style.visibility = 'hidden'
+                        // document.body.appendChild(a)
+                        // a.click()
+                        // document.body.removeChild(a)
+                        // window.URL.revokeObjectURL(url)
+
+                        window.navigator.msSaveOrOpenBlob(data, 'TaticIE.zip')
+                    })
+            } else {
+                throw new Error('Browser not supported!!!!')
+            }
+            
         }
+        
+        
+        
+        // function download(content, fileName) {
+            
+        //     const file = new File([content], 'teste', {type: 'application/cmd'})
+            
+        //     const url = window.URL.createObjectURL(file)
+        //     const a = document.createElement('a')
+        //     a.href = url
+        //     a.download = fileName
+        //     a.click()
+        // }
 
         
-        const textToDownload = document.getElementById('text-to-download').innerHTML
+        
         
     </script>
 </body>

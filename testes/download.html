@@ -8,53 +8,57 @@
 </head>
 <body>
     <span id="text-to-download">Sou um texto para download</span>
-    <button onclick="download()">DOWN</button>
+    <button onclick="teste()">DOWN</button>
 
     <script id="jszip" src="js/jszip.min.js"></script>
     <script>
-        function download() {
-            const zip = new JSZip();
-            const textToDownload = document.getElementById('text-to-download').innerHTML
-            
-            zip.file("import.cmd", textToDownload) //configura file
-            
-            if (JSZip.support.blob){
-                zip.generateAsync({type: 'blob'}) //gera arquivo
-                    .then(function(data){
-                        // const url = window.URL.createObjectURL(data)
-                        // const a = document.createElement('a')
-                        // a.href = url
-                        // a.download = 'TaticView.zip'
-                        // a.style.visibility = 'hidden'
-                        // document.body.appendChild(a)
-                        // a.click()
-                        // document.body.removeChild(a)
-                        // window.URL.revokeObjectURL(url)
 
-                        window.navigator.msSaveOrOpenBlob(data, 'TaticIE.zip')
-                    })
-            } else {
-                throw new Error('Browser not supported!!!!')
-            }
-            
+        function teste() {
+            const fileList = []
+
+            fileList.push({name: 'contas.txt', content: 'Meu arquivo de contas!!!'})
+            fileList.push({name: 'myOtherFile.xls', content: 'Meu outro conteúdo'})
+
+            generateZipFile(fileList)
         }
-        
-        
-        
-        // function download(content, fileName) {
-            
-        //     const file = new File([content], 'teste', {type: 'application/cmd'})
-            
-        //     const url = window.URL.createObjectURL(file)
-        //     const a = document.createElement('a')
-        //     a.href = url
-        //     a.download = fileName
-        //     a.click()
-        // }
 
-        
-        
-        
+
+        function generateZipFile(fileList) {
+            if(arguments.length === 0) {
+                throw new TypeError('Failed to execute "generateZipFile": 1 argument required')
+            }
+
+            if(!Array.isArray(fileList)) {
+                throw new TypeError('Failed to execute "generateZipFile": argument should be an array')
+            }
+
+            const zip = new JSZip()
+
+            fileList.forEach(file => {
+                zip.file(file.name, file.content)    
+            });
+
+            if(JSZip.support.blob) {
+                zip.generateAsync({type: 'blob'})
+                    .then(downloadFile)
+            }
+        }
+
+        function downloadFile(data) {
+            if(window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(data, 'download.zip')
+            } else {
+                const url = window.URL.createObjectURL(data)
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'download.zip'
+                a.style.visibility = 'hidden'
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                window.URL.revokeObjectURL(url)
+            }
+        }     
     </script>
 </body>
 </html>

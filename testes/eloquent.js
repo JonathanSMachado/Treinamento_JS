@@ -57,7 +57,7 @@ function minNumber(number1, number2) {
 // console.log(minNumber(1,10))
 
 // ***********************************************
-function isEven(number) {
+function isEvenRecursive(number) {
     if (number < 0) throw Error('Number should be positive')
 
     if (number === 0) {
@@ -65,11 +65,17 @@ function isEven(number) {
     } else if (number === 1) {
         return false
     } else {
-        return isEven(number - 2)
+        return isEvenRecursive(number - 2)
     }
 }
 
-// console.log(isEven(-1))
+function isEven(number) {
+    if(number < 0) throw new Error('Number should be positive')
+
+    return number % 2 === 0
+}
+
+// console.log(isEven(75))
 
 // ***********************************************
 function countChar(string, charToCount) {

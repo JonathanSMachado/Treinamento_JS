@@ -31,6 +31,16 @@
         <button wm-submit>Pesquisar</button>
     </form>
     <script>
-        // ...
+        const form = document.forms[0]
+        form.onsubmit = e => {
+            e.preventDefault()
+            
+            const formData = new FormData(form)
+            formData.append('novo-campo', 'content')
+
+            for(let dado of formData) {
+                console.log(dado)
+            }
+        }
     </script>
 </body>

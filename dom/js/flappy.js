@@ -132,18 +132,6 @@ function Passaro(alturaDoJogo) {
     this.setY(alturaDoJogo / 2)
 }
 
-const barreiras = new Barreiras(700, 1200, 400, 400)
-const passaro = new Passaro(700)
-const areaDoJogo = document.querySelector('[wm-flappy]')
-areaDoJogo.appendChild(passaro.getElement())
-areaDoJogo.appendChild(new Progresso().getElement())
-barreiras.getPares().forEach(par => areaDoJogo.appendChild(par.getElement()))
-
-setInterval(() => {
-    barreiras.animar()
-    passaro.animar()
-}, 20)
-
 function Progresso() {
     const element = newElement('span', 'progresso')
 
@@ -152,8 +140,52 @@ function Progresso() {
     }
 
     this.getElement = () => element
-
     this.atualizarPontos(0)
+}
 
+// const barreiras = new Barreiras(700, 1200, 400, 400)
+// const passaro = new Passaro(700)
+// const areaDoJogo = document.querySelector('[wm-flappy]')
+// areaDoJogo.appendChild(passaro.getElement())
+// areaDoJogo.appendChild(new Progresso().getElement())
+// barreiras.getPares().forEach(par => areaDoJogo.appendChild(par.getElement()))
+
+// setInterval(() => {
+//     barreiras.animar()
+//     passaro.animar()
+// }, 20)
+
+function estaoSobrepostos(elementA, elementB) {
+    const a = elementA.getBoundingClientRect()
+    const b = elementB.getBoundingClientRect()
+
+    const horizontal = a.left
+}
+
+function FlappyBird() {
+    let pontos = 0
+
+    const areaDoJogo = document.querySelector('[wm-flappy]')
+    const altura = areaDoJogo.clientHeight
+    const largura = areaDoJogo.clientWidth
+
+    const progresso = new Progresso()
+    const barreiras = new Barreiras(altura, largura, 200, 400, 
+        () => progresso.atualizarPontos(++pontos))
+
+    const passaro = new Passaro(altura)
+
+    areaDoJogo.appendChild(progresso.getElement())
+    areaDoJogo.appendChild(passaro.getElement())
+    barreiras.getPares().forEach(par => areaDoJogo.appendChild(par.getElement()))
+
+    this.start = () => {
+        const temporizador = setInterval(() => {
+            barreiras.animar()
+            passaro.animar()
+        }, 20)
+    }
 
 }
+
+new FlappyBird().start()

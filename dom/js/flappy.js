@@ -159,7 +159,28 @@ function estaoSobrepostos(elementA, elementB) {
     const a = elementA.getBoundingClientRect()
     const b = elementB.getBoundingClientRect()
 
-    const horizontal = a.left
+    const horizontal = a.left + a.width >= b.left 
+        && b.left + b.width >= a.left
+
+    const vertical = a.top + a.height >= b.top
+        && b.top + b.height >= a.top
+    
+    return horizontal && vertical
+
+}
+
+function colidiu(passaro, barreiras) {
+    let colidiu = false
+    barreiras.getPares().forEach(parDeBarreiras => {
+        if(!colidiu) {
+            const superior = parDeBarreiras.getSuperior().getElement()
+            const inferior = parDeBarreiras.getInferior().getElement()
+            colidiu = estaoSobrepostos(passaro.getElement(), superior) 
+                || estaoSobrepostos(passaro.getElement(), inferior)
+        }
+    })
+
+    return colidiu
 }
 
 function FlappyBird() {
@@ -183,6 +204,10 @@ function FlappyBird() {
         const temporizador = setInterval(() => {
             barreiras.animar()
             passaro.animar()
+
+            if(colidiu(passaro, barreiras)){
+                clearInterval(temporizador)
+            }
         }, 20)
     }
 

@@ -37,3 +37,8 @@ console.log(obj)
 Object.freeze(obj)
 obj.c = "Teste"
 console.log(obj)
+
+
+for (var i in pessoa){
+    console.log(i)
+}

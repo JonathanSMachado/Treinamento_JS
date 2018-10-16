@@ -15,3 +15,7 @@ const aprovados = ['Jonathan', 'João', 'Maria']
 aprovados.forEach2(function(elem, index, arr){
     console.log(`Indice ${index} - Nome ${elem} - Arr: ${arr}`)
 });
+
+for(let i in aprovados) {
+    console.log(i)
+}

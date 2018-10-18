@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 const multer = require('multer')
 
 const storage = multer.diskStorage({
-    destination: function(rea, file, callback) {
+    destination: function(req, file, callback) {
         callback(null, './upload')
     },
 

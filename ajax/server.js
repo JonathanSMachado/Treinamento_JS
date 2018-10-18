@@ -18,6 +18,8 @@ const storage = multer.diskStorage({
     }
 })
 
+const upload = multer({storage}).single('arquivo')
+
 app.post('/upload', (req, res) => {
     upload(req, res, err => {
         if(err) {
@@ -27,7 +29,5 @@ app.post('/upload', (req, res) => {
         res.end('Concluído com sucesso')
     })
 })
-
-const upload = multer({storage}).single('arquivo')
 
 app.listen(8080, () => console.log("Server is ON"))

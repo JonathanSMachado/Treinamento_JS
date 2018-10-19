@@ -25,6 +25,38 @@
     </nav>
     <div class="pagina"></div>
     <script>
-        // ...
+        function navigate(url, targetSelector, push = true) {
+            if (!url || !targetSelector) return
+
+            const element = document.querySelector(targetSelector)
+
+            fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    element.innerHTML = html
+                    
+                    //adiciona entrada no histórico, para utilizar o botao voltar do browser
+                    if (push) {
+                        history.pushState({ targetSelector }, null, url)
+                    }
+                })
+        }
+
+        document.querySelectorAll('[wm-link]').forEach(link => {
+            const url = link.attributes['wm-link'].value
+            const target = link.attributes['wm-destino'].value
+
+            link.onclick = e => {
+                e.preventDefault()
+                navigate(url, target)
+            }
+        })
+        
+        //evento chamado ao utilizar o voltar do browser
+        window.onpopstate = e => {
+            if (e.state) {
+                navigate(window.location.href, e.state.targetSelector, false)
+            }
+        }
     </script>
 </body>

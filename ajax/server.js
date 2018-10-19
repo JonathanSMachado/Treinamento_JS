@@ -30,4 +30,27 @@ app.post('/upload', (req, res) => {
     })
 })
 
+app.post('/formulario', (req, res) => {
+    res.send({
+        ...req.body,
+        id: 1
+    })
+})
+
+function isPar(numero) {
+    return parseInt(numero) % 2 === 0 ? 'par' : 'impar'
+}
+
+app.get('/parOuImpar', (req, resp) => {
+    resp.send({
+        resultado: isPar(req.query.numero)
+    })
+})
+
+app.get('/parOuImpar/:numero', (req, res) => {
+    res.send({
+        resultado: isPar(req.params.numero)
+    })
+})
+
 app.listen(8080, () => console.log("Server is ON"))

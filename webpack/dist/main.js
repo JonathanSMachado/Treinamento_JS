@@ -101,7 +101,7 @@ eval("module.exports = {\r\n    saudacao() {\r\n        return 'Ola eu sou o mod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Pessoa; });\n/* harmony import */ var _modulos_moduloA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulos/moduloA */ \"./src/modulos/moduloA.js\");\n/* harmony import */ var _modulos_moduloA__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modulos_moduloA__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nclass Pessoa {\r\n    cumprimentar() {\r\n        return 'Bom dia!'\r\n    }\r\n}\n\n//# sourceURL=webpack:///./src/pessoa.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Pessoa; });\n/* harmony import */ var _modulos_moduloA__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modulos/moduloA */ \"./src/modulos/moduloA.js\");\n/* harmony import */ var _modulos_moduloA__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modulos_moduloA__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nclass Pessoa {\r\n    constructor(name) {\r\n        this.name = name\r\n    }\r\n\r\n    cumprimentar() {\r\n        return `Olá ${this.name}. Tudo bem?`\r\n    }\r\n}\n\n//# sourceURL=webpack:///./src/pessoa.js?");
 
 /***/ }),
 
@@ -113,7 +113,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pessoa_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pessoa.js */ \"./src/pessoa.js\");\n\r\n\r\nconst atendente = new _pessoa_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]\r\nconsole.log(atendente.cumprimentar())\n\n//# sourceURL=webpack:///./src/principal.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pessoa_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pessoa.js */ \"./src/pessoa.js\");\n\r\n\r\nconst atendente = new _pessoa_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('Jonathan')\r\nconsole.log(atendente.cumprimentar())\n\n//# sourceURL=webpack:///./src/principal.js?");
 
 /***/ })
 

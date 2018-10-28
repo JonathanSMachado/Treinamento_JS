@@ -11,7 +11,7 @@ module.exports = {
     
     plugins: [
         new MiniCssExtractPlugin({
-            
+            filename: 'estilo.css'
         })
     ],
 
@@ -19,7 +19,8 @@ module.exports = {
         rules: [{
             test: /\.css$/,
             use: [
-                'style-loader', //Adiciona CSS no DOM injetando a tag <style>
+                MiniCssExtractPlugin.loader,
+                // 'style-loader', //Adiciona CSS no DOM injetando a tag <style>
                 'css-loader' // interpreta @imports, url(), ...                
             ]
         }]

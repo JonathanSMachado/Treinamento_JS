@@ -1,9 +1,9 @@
 (function(){
-    function setLinkAsSelected(link) {
+    function setLinkAsSelected(hash) {
         const links = document.querySelectorAll(`[wm-link]`)
         links.forEach(link => link.classList.remove('selected'))
 
-        const link = document.querySelector(`[wm-link=${link}]`)
+        const link = document.querySelector(`[wm-link=${hash}]`)
         link.classList.add('selected')
     }
 

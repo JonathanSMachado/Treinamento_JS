@@ -6,9 +6,9 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
     mode: devMode ? 'development' : 'production',
-    entry: './src/index.js',
+    entry: './src/init.js',
     output: {
-        filename: 'index.js',
+        filename: 'init.js',
         path: __dirname + '/public'
     },
 

@@ -1,15 +1,15 @@
 (function(){
     function setLinkAsSelected(hash) {
         const links = document.querySelectorAll('[wm-link]')
-        links.forEach(link => link.classList.remove('selected'))
+        links.forEach(link => link.classList.remove('selecionado'))
 
-        const link = document.querySelector(`[wm-link=${hash}]`)
-        link.classList.add('selected')
+        const link = document.querySelector(`[wm-link='${hash}']`)
+        link.classList.add('selecionado')
     }
 
     function navigateTo(link) {
         const url = link.substring(1)
-        const target = document.querySelector('[wm-destino]')
+        const target = document.querySelector('[wm-link-destino]')
 
         fetch(url)
             .then(response => response.text())
@@ -34,6 +34,6 @@
         navigateTo(location.hash)
     } else {
         const firstLink = document.querySelector('[wm-link]')
-        navigateTo(firstLink)
+        navigateTo(firstLink.hash)
     }
 })()

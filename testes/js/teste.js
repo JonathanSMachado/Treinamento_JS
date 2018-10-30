@@ -31,40 +31,57 @@ getPersonA(1)
 
 */
 
-function varBlockScope() {
-    var x = 31
+// Testes com escopos
+// function varBlockScope() {
+//     var x = 31
 
-    if(true) {
-        var x = 71
-        console.log(x)
-    }
+//     if(true) {
+//         var x = 71
+//         console.log(x)
+//     }
 
-    console.log(x)
+//     console.log(x)
+// }
+
+// function varClosureBlockScope() {
+//     var x = 31;
+
+//     (function(){
+//         //if(true){
+//             var x = 71
+//             console.log(`Teste ${x}`)
+//         //}
+//     })()
+
+//     console.log(x)
+// }
+
+// function letScope() {
+//     let x = 31
+
+//     if(true) {
+//         let x = 71
+//         console.log(x)
+//     }
+//     console.log(x)
+// }
+
+// varBlockScope()
+// varClosureBlockScope()
+// letScope()
+
+// ****************************************************
+
+// Leitura de arquivos do disco
+const fs = require('fs')
+const path = require('path')
+
+function loadFiles() {
+    const files = fs.readdirSync(path.resolve(__dirname))
+    
+    files.forEach(file => {
+        console.log(file)
+    })
 }
 
-function varClosureBlockScope() {
-    var x = 31;
-
-    (function(){
-        //if(true){
-            var x = 71
-            console.log(`Teste ${x}`)
-        //}
-    })()
-
-    console.log(x)
-}
-
-function letScope() {
-    let x = 31
-
-    if(true) {
-        let x = 71
-        console.log(x)
-    }
-    console.log(x)
-}
-
-varBlockScope()
-varClosureBlockScope()
-letScope()
+loadFiles()

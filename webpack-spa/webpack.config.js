@@ -3,22 +3,43 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const fs = require('fs')
 
-const public = '/public'
-const path = __dirname + public
+const path = __dirname + '/public'
+
+// função que retorna os arquivos de um diretório
+function loadFiles(path) {
+    const folder = __dirname + path
+    const readPages = fs.readdirSync(folder)
+    return readPages   
+}
+
+// configura o carregamento dinâmico das páginas
+let loadHtmlFiles = loadFiles('/src/pages').map(file => {
+    return  new HtmlPlugin({
+        filename: `pages/${file}`,
+        template: `./src/pages/${file}`,
+        minify: {
+            collapseWhitespace: true,
+            removeComments: true
+        },
+        cache: true
+    })
+})
 
 module.exports = {
     mode: 'production',
     entry: {
-        init: './src/init.js'
+        navigate: './src/init.js'
     },
     output: {
-        filename: '[name].min.js',
+        filename: 'assets/js/[name].min.js',
         path: path
     },
 
     devServer: {
-        contentBase: `.${public}`,
+        contentBase: './public',
         port: 9000
     },
 
@@ -34,74 +55,41 @@ module.exports = {
     },
 
     plugins: [
+        new CleanWebpackPlugin(['public']), //limpa diretório antes de buildar novamente
         new MiniCssExtractPlugin({
             filename: 'assets/css/style.min.css',
-            // chunkFilename: 'assets/css/[name].css'
         }),
 
-        // index.html
+        // carrega o index.html
         new HtmlPlugin({
             filename: 'index.html',
             template: './src/index.html',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true
-            }
+            },
+            cache: true
         }),
-
-        // cursos.html
-        new HtmlPlugin({
-            filename: 'pages/cursos.html',
-            template: './src/pages/cursos.html',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true
-            }
-        }),
-
-        // inicio.html
-        new HtmlPlugin({
-            filename: 'pages/inicio.html',
-            template: './src/pages/inicio.html',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true
-            }
-        }),
-
-        // sobre.html
-        new HtmlPlugin({
-            filename: 'pages/sobre.html',
-            template: './src/pages/sobre.html',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true
-            }
-        }),
-
-        // suporte.html
-        new HtmlPlugin({
-            filename: 'pages/suporte.html',
-            template: './src/pages/suporte.html',
-            minify: {
-                collapseWhitespace: true,
-                removeComments: true
-            }
-        }),
-    ],
+    ].concat(loadHtmlFiles), //para carregar as demais páginas dinamicamente
 
     module: {
         rules: [{
+            // load style files
             test: /\.s?[ac]ss$/,
-            use: [
-                MiniCssExtractPlugin.loader,
-                // 'style-loader', //Adiciona CSS no DOM injetando a tag <style>
-                'css-loader', // interpreta @imports, url(), ...               
-                'sass-loader',
-            ]
+            exclude: /node_modules/,
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
         }, {
+            // load images files
             test: /\.(png|svg|jpg|gif)$/,
-            use: ['file-loader']
+            exclude: /node_modules/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    cacheDirectory: true,
+                    name: '[name].[ext]',
+                    outputPath: 'assets/images/'
+                }
+            }]
         }]
     }
 }

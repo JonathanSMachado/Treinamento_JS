@@ -1,26 +1,33 @@
 const webpack = require('webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
+
+const public = '/public'
+const path = __dirname + public
 
 module.exports = {
     mode: 'production',
-    entry: './src/init.js',
+    entry: {
+        init: './src/init.js'
+    },
     output: {
-        filename: 'navigate.min.js',
-        path: __dirname + '/public'
+        filename: '[name].min.js',
+        path: path
     },
 
     devServer: {
-        contentBase: './public',
+        contentBase: `.${public}`,
         port: 9000
     },
 
     optimization: {
         minimizer: [
-            new UglifyJsPlugin({
+            new UglifyJSPlugin({
                 cache: true,
-                parallel: true
+                parallel: true,
+                sourceMap: true
             }),
             new OptimizeCSSAssetsPlugin({})
         ]
@@ -28,8 +35,59 @@ module.exports = {
 
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'estilo.css'
-        })
+            filename: 'assets/css/[name].css',
+            chunkFilename: 'assets/css/[name].css'
+        }),
+
+        // index.html
+        new HtmlPlugin({
+            filename: 'index.html',
+            template: './src/index.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        }),
+
+        // cursos.html
+        new HtmlPlugin({
+            filename: 'pages/cursos.html',
+            template: './src/pages/cursos.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        }),
+
+        // inicio.html
+        new HtmlPlugin({
+            filename: 'pages/inicio.html',
+            template: './src/pages/inicio.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        }),
+
+        // sobre.html
+        new HtmlPlugin({
+            filename: 'pages/sobre.html',
+            template: './src/pages/sobre.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        }),
+
+        // suporte.html
+        new HtmlPlugin({
+            filename: 'pages/suporte.html',
+            template: './src/pages/suporte.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        }),
     ],
 
     module: {

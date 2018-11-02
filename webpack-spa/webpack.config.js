@@ -30,11 +30,11 @@ let loadHtmlFiles = loadFiles('/src/pages').map(file => {
 
 module.exports = {
     mode: 'production',
-    entry: {
-        navigate: './src/init.js'
-    },
+    entry: [
+        './src/init.js'
+    ],
     output: {
-        filename: 'assets/js/[name].min.js',
+        filename: 'assets/js/app.min.js',
         path: path
     },
 
@@ -90,6 +90,17 @@ module.exports = {
                     outputPath: 'assets/images/'
                 }
             }]
-        }]
+        }, {
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            // Limiting the size of the woff fonts breaks font-awesome ONLY for the extract text plugin
+            // loader: "url?limit=10000"
+            use: {
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/'
+                }
+            }
+        }]  
     }
 }

@@ -20,11 +20,14 @@
             { nome: 'Julia', nota: 9.7 }
         ]
         
-        const table = $('<table>')
-
+        const $table = $('<table>')
+        
         pessoas.forEach(pessoa => {
-            let tr = $('<tr>').append('<td>' + pessoa.nome + '</td>').append('<td>' + pessoa.nota + '</td>')
-            table.append(tr)
+            let $tr = $('<tr>')
+                        .append('<td>' + pessoa.nome + '</td>')
+                        .append('<td>' + pessoa.nota + '</td>')
+            
+            $table.append($tr)
         });
 
         $('#conteudo').append(table)

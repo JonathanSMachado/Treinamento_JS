@@ -23,6 +23,42 @@
     <h1>Manipulando Atributos</h1>
     <div wm-relogio='1000'></div>
     <script>
-        // ...
+        
+        (function(){
+            function Clock(element) {
+                const $element = $(element)
+                const $hour = $('<p>')
+                const $btnMinus = $('<button>').html('-')
+                const $btnPlus = $('<button>').html('+')
+
+                $element.html($hour).append($btnMinus, $btnPlus)
+
+                const getUpdateInterval = () => parseInt($element.attr('wm-relogio'))
+
+                let timer = null
+                const start = () => {
+                    if(timer) {
+                        clearInterval(timer)
+                    }
+
+                    timer = setInterval(() => {
+                        $hour.html(new Date().toLocaleString('pt-BR'))
+                    }, getUpdateInterval())
+                }
+
+                const changeUpdateInterval = delta => {
+                    const newInterval = Math.max(getUpdateInterval() + delta, 1000)
+                    $element.attr('wm-relogio', newInterval)
+                    start()
+                }
+                
+                $btnMinus.click(e => changeUpdateInterval(1000))
+                $btnPlus.click(e => changeUpdateInterval(-1000))
+                start()
+            }
+
+            $('[wm-relogio]').each((index, element) => new Clock(element))
+        })()
+
     </script>
 </body>

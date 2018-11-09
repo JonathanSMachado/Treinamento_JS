@@ -24,12 +24,12 @@
         
         pessoas.forEach(pessoa => {
             let $tr = $('<tr>')
-                        .append('<td>' + pessoa.nome + '</td>')
-                        .append('<td>' + pessoa.nota + '</td>')
+                        .append(`<td>${pessoa.nome}</td>`)
+                        .append(`<td>${pessoa.nota}</td>`)
             
             $table.append($tr)
         });
 
-        $('#conteudo').append(table)
+        $('#conteudo').append($table)
     </script>
 </body>

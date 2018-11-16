@@ -117,6 +117,7 @@ function sum(arr) {
 
 // console.log(sum(range(1,10)))
 
+//inverte o conteúdo em um novo array e retorna esse novo array
 function reverseArray(arr) {
     let arrReverse = []
 
@@ -127,6 +128,7 @@ function reverseArray(arr) {
     return arrReverse
 }
 
+//inverte o conteúdo no proprio array de entrada
 function reverseArrayInPlace(arr) {
     let aux = Math.floor(arr.length/2)
     
@@ -139,8 +141,9 @@ function reverseArrayInPlace(arr) {
 
 // console.log(reverseArray([1,2,3]))
 
-// var arr = [5,6,7, 8, 9, 10]
+var arr = [5,6,7, 8, 9, 10]
+console.log(reverseArray(arr))
 // reverseArrayInPlace(arr)
-// console.log(arr)
+console.log(arr)
 
 // ***********************************************

@@ -5,7 +5,6 @@ const isPrimo = (number) => {
     let divider = 2
     
     while(divider < number){
-        console.log(`${number}/${divider}`)
         if(number % divider === 0){
             return false
         }

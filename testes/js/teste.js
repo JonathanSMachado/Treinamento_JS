@@ -73,15 +73,27 @@ getPersonA(1)
 // ****************************************************
 
 // Leitura de arquivos do disco
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 
-function loadFiles() {
-    const files = fs.readdirSync(path.resolve(__dirname))
+// function loadFiles() {
+//     const files = fs.readdirSync(path.resolve(__dirname))
     
-    files.forEach(file => {
-        console.log(file)
-    })
+//     files.forEach(file => {
+//         console.log(file)
+//     })
+// }
+
+// loadFiles()
+
+// ****************************************************
+// Objeto como array
+const obj = {
+    0: 'Jonathan',
+    1: 'Adriene',
+    2: 'Isabeli'
 }
 
-loadFiles()
+const arr = ['Jonathan', 'Adriene', 'Isabeli']
+
+console.log(obj[1], arr[1])

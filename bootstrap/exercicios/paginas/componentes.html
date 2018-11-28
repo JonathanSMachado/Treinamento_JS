@@ -189,6 +189,38 @@
 <hr>
 
 <!-- Accordion -->
+<div>
+    <div id="accordion" class="mb-5">
+        <div class="card">
+            <div class="card-header" id="pergunta1">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#resposta1">
+                        Quem é o professor mais legal?
+                    </button>
+                </h5>
+            </div>
+            <div class="collapse" id="resposta1" data-parent="#accordion">
+                <div class="card-body">
+                    Posso dizer?
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="pergunta2">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#resposta2">
+                        Sou uma outra pergunta?
+                    </button>
+                </h5>
+            </div>
+            <div class="collapse" id="resposta2" data-parent="#accordion">
+                <div class="card-body">
+                    Sim, és uma outra perguntra
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     $('[data-toggle="tooltip"]').tooltip()

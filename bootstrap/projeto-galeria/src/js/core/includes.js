@@ -5,7 +5,7 @@ function loadIncludes(parent) {
         parent = 'body'
     }
 
-    $(parent).find('[wm-include').each(function(i, e){
+    $(parent).find('[wm-include]').each(function(i, e){
         const url = $(e).attr('wm-include')
         $.ajax({
             url,

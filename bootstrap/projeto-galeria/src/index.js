@@ -1,3 +1,5 @@
+//Arquivo por onde o Webpack inicia o escaneamento das dependencias
+
 // Arquivos SASS
 import './scss/index.scss'
 

@@ -7,3 +7,4 @@ import 'bootstrap'
 
 //Meus JS
 import './js/core/includes'
+import './js/plugins/city-buttons'

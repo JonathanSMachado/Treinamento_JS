@@ -5,6 +5,8 @@ import { onLoadHtmlSuccess } from '../core/includes'
 const duration = 300
 
 function filterByCity(city){
+    $('button.active').removeClass('active')
+
     $('[wm-city]').each(function(i, e){
         const isTarget = $(this).attr('wm-city') === city || city === null
         if (isTarget) {

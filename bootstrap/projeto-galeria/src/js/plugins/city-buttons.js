@@ -5,8 +5,6 @@ import { onLoadHtmlSuccess } from '../core/includes'
 const duration = 300
 
 function filterByCity(city){
-    $('button.active').removeClass('active')
-
     $('[wm-city]').each(function(i, e){
         const isTarget = $(this).attr('wm-city') === city || city === null
         if (isTarget) {
@@ -20,6 +18,11 @@ function filterByCity(city){
     })
 }
 
+function activateButton($button) {
+    $('button.active').removeClass('active')
+    $button.addClass('active')
+}
+
 $.fn.cityButtons = function() {
     const cities = new Set
     $('[wm-city]').each(function(i, e){
@@ -28,12 +31,18 @@ $.fn.cityButtons = function() {
 
     const buttons = Array.from(cities).map(city => {
         const button = $('<button>').addClass(['btn', 'btn-info']).html(city)
-        button.click(e => filterByCity(city))
+        button.click(e => {
+            activateButton(button)
+            filterByCity(city)
+        })
         return button
     })
 
     const buttonAll = $('<button>').addClass(['btn', 'btn-info', 'active']).html('Todas')
-    buttonAll.click(e => filterByCity(null))
+    buttonAll.click(e => {
+        activateButton(buttonAll)
+        filterByCity(null)
+    })
     buttons.push(buttonAll)
 
     const buttonGroup = $('<div>').addClass(['btn-group'])

@@ -23,11 +23,11 @@ module.exports = {
         ]
     },
     output: {
-        filename: 'app.js',
+        filename: 'scripts/app.js',
         path: __dirname + '/build'
     },
     plugins: [
-        new MiniCssExtractPlugin({ filename: 'estilo.css' }),
+        new MiniCssExtractPlugin({ filename: 'css/estilo.css' }),
         new CopyWebpackPlugin([
             { context: 'src/', from: '**/*.html' },
             { context: 'src/', from: 'imgs/**/*' }
@@ -43,11 +43,18 @@ module.exports = {
                 'sass-loader',
             ]
         }, {
-            test: /\.(png|svg|jpg|gif)$/,
+            test: /\.(png|jpg|gif)$/,
             use: ['file-loader']
         }, {
             test: /.(ttf|otf|eot|svg|woff(2)?)$/,
-            use: ['file-loader']
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/',
+                    publicPath: '/fonts'
+                }
+            }]
         }]
     }
 }

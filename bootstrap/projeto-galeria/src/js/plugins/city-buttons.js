@@ -30,25 +30,25 @@ $.fn.cityButtons = function() {
     })
 
     const buttons = Array.from(cities).map(city => {
-        const button = $('<button>').addClass(['btn', 'btn-info']).html(city)
-        button.click(e => {
-            activateButton(button)
+        const $button = $('<button>').addClass(['btn', 'btn-info']).html(city)
+        $button.click(e => {
+            activateButton($button)
             filterByCity(city)
         })
-        return button
+        return $button
     })
 
-    const buttonAll = $('<button>').addClass(['btn', 'btn-info', 'active']).html('Todas')
-    buttonAll.click(e => {
-        activateButton(buttonAll)
+    const $buttonAll = $('<button>').addClass(['btn', 'btn-info', 'active']).html('Todas')
+    $buttonAll.click(e => {
+        activateButton($buttonAll)
         filterByCity(null)
     })
     buttons.push(buttonAll)
 
-    const buttonGroup = $('<div>').addClass(['btn-group'])
-    buttonGroup.append(buttons)
+    const $buttonGroup = $('<div>').addClass(['btn-group'])
+    $buttonGroup.append(buttons)
 
-    $(this).html(buttonGroup)
+    $(this).html($buttonGroup)
     return this
 }
 

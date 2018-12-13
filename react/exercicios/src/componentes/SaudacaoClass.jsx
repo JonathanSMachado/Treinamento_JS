@@ -7,10 +7,17 @@ export default class SaudacaoClass extends Component {
         name: this.props.name
     }
 
-    setType(_type) {
-        this.setState({type: _type})
+    constructor(props) {
+        super(props)
+        this.setType = this.setType.bind(this)
     }
 
+    //recebendo o evento para setar o tipo no state
+    setType(e) {
+        this.setState({ type: e.target.value })
+    }
+
+    //recebendo direto o nome para seta-lo no state
     setName(_name) {
         this.setState({name: _name})
     }
@@ -21,7 +28,7 @@ export default class SaudacaoClass extends Component {
             <div>
                 <h1>{ type } { name }</h1>
                 <input type='text' value={type} placeholder='Tipo...' 
-                    onChange={e => this.setType(e.target.value)}/>
+                    onChange={this.setType}/>
                 <input type='text' value={name} placeholder='Nome...' 
                     onChange={e => this.setName(e.target.value)}/>
             </div>

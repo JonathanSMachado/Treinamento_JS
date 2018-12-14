@@ -1,16 +1,10 @@
-@font-face {
-    font-family: 'Teste';
-    src: url('./fonts/RobotoMono-Thin.ttf');
-}
-
-* {
-    font-family: 'Teste', monospace;
-}
-
-body {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.calculator {
+    height: 320px;
+    width: 235px;
+    border-radius: 5px;
+    overflow: hidden;
+    
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: 1fr repeat(5, 48px);
 }

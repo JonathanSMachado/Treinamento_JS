@@ -60,7 +60,7 @@ export default class Calculator extends Component {
         const displayValue = currentValue + digit
         this.setState({ displayValue, clearDisplay: false })
 
-        if(digit !== '.') {
+        if (digit !== '.') {
             const i = this.state.current
             const newValue = parseFloat(displayValue)
             const values = [...this.state.values]

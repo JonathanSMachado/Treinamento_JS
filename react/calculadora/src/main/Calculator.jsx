@@ -10,6 +10,12 @@ const initialState = {
     values: [0, 0],
     current: 0
 }
+
+const SUM_OPERATOR = '+'
+const DIV_OPERATOR = '/'
+const SUB_OPERATOR = '-'
+const MUL_OPERATOR = '*'
+
 export default class Calculator extends Component {
 
     constructor(props) {
@@ -21,6 +27,28 @@ export default class Calculator extends Component {
 
     state = { ...initialState }
 
+    resolveOperation() {
+        const values = [...this.state.values]
+        const operation = this.state.operation
+
+        switch (operation) {
+            case SUM_OPERATOR:
+                return values[0] + values[1]
+
+            case SUB_OPERATOR:
+                return values[0] - values[1]
+
+            case DIV_OPERATOR:
+                return values[0] / values[1]
+
+            case MUL_OPERATOR:
+                return values[0] * values[1]
+
+            default:
+                return values[0]
+        }
+    }
+
     clearMemory() {
         this.setState({ ...initialState })
     }
@@ -30,19 +58,21 @@ export default class Calculator extends Component {
             this.setState({ operation, current: 1, clearDisplay: true })
         } else {
             const equals = operation === '='
-            const currentOperation = this.state.operation
+            // const currentOperation = this.state.operation
 
             const values = [...this.state.values]
             
-            try {
-                values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
-            } catch(e) {
-                values[0] = this.state.values[0]
-            }
+            // try {
+            //     values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
+            // } catch(e) {
+            //     values[0] = this.state.values[0]
+            // }
+
+            values[0] = this.resolveOperation()
             
             values[1] = 0
             this.setState({
-                displayValue: values[0], 
+                displayValue: values[0].toString(), 
                 operation: equals ? null : operation, 
                 current: equals ? 0 : 1, 
                 clearDisplay: !equals, 

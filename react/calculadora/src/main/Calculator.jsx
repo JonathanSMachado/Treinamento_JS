@@ -58,19 +58,11 @@ export default class Calculator extends Component {
             this.setState({ operation, current: 1, clearDisplay: true })
         } else {
             const equals = operation === '='
-            // const currentOperation = this.state.operation
-
             const values = [...this.state.values]
             
-            // try {
-            //     values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
-            // } catch(e) {
-            //     values[0] = this.state.values[0]
-            // }
-
             values[0] = this.resolveOperation()
-            
             values[1] = 0
+            
             this.setState({
                 displayValue: values[0].toString(), 
                 operation: equals ? null : operation, 
@@ -83,7 +75,7 @@ export default class Calculator extends Component {
     }
 
     addDigit(digit) {
-        if (digit === '.' && this.state.displayValue.includes('.')) return
+        if (digit === '.' && this.state.displayValue.includes('.') && !this.state.clearDisplay) return
 
         const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay
         const currentValue = clearDisplay ? '' : this.state.displayValue

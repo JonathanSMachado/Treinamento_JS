@@ -7,6 +7,8 @@ import SaudacaoClass from './componentes/SaudacaoClass'
 // import Pai from './componentes/Pai'
 // import Filho from './componentes/Filho'
 
+// import { ButtonSave, ButtonCancel } from './componentes/Button'
+
 // const element = <h1>Iniciando com React</h1>
 // ReactDOM.render(<Primeiro />, document.getElementById('root'))
 
@@ -24,3 +26,5 @@ ReactDOM.render(<SaudacaoClass name='Jonathan' type='Bom dia'/>, document.getEle
 //     </Pai>, 
 //     document.getElementById('root')
 // )
+
+// ReactDOM.render(<ButtonCancel/>, document.getElementById('root'))

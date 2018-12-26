@@ -1,15 +1,19 @@
 {
-    "users": [{
-        "id": 1,
-        "name": "Jonathan S. Machado",
-        "email": "jonathansmachado@gmail.com"
-    }, {
-        "id": 2,
-        "name": "Adriene C. Silva",
-        "email": "adricristinesilva@gmail.com"
-    }, {
-        "id": 3,
-        "name": "Isabeli S. Machado",
-        "email": "belsmachado@gmail.com"
-    }]
+  "users": [
+    {
+      "id": 1,
+      "name": "Jonathan S. Machado",
+      "email": "jonathansmachado@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Adriene C. Silva",
+      "email": "adricristinesilva@gmail.com"
+    },
+    {
+      "name": "Isabeli S. Machado",
+      "email": "belsmachado@gmail.com",
+      "id": 3
+    }
+  ]
 }

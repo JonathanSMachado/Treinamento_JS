@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Eventos</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+</head>
+<body class="exercicio">
+    <div id="app">
+        <p>{{ contador }}</p>
+        <p><button v-on:click="add">+1</button></p>
+        <p><button @click="contador -= 2">-2</button></p>
+        <p><input type="text" @keyup.enter="alert"></p>
+        <p @mousemove='position'>
+            Cordenadas: {{ x }} - {{ y }}
+            <span @mousemove.stop>Aqui não</span>
+        </p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                contador: 0,
+                x: 0,
+                y: 0
+            }, 
+
+            methods: {
+                add() {
+                    this.contador++
+                },
+
+                alert(e) {
+                    alert('Enter pressed!')
+                },
+
+                position(e) {
+                    this.x = e.clientX
+                    this.y = e.clientY
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Binding</title>
+    <link rel="stylesheet" href="/css/estilo.css">
+    <script src="/js/vue.min.js"></script>
+</head>
+<body class="exercicio">
+    <div id="app">
+        <p>Primeira forma de bind (v-bind:href): <a v-bind:href="link" target="_blank">Canal</a></p>
+        <p>Segunda forma de bind (:href): <a :href="link" target="_blank">Canal</a></p>
+        <p>Bind sem v-model (não atualiza demais componentes)<br>
+            <input type="text" class="input" :value="nome">
+        </p>
+        <p>Bind com v-model (atualiza demais componentes)<br>
+            <input type="text" class="input" v-model="nome"><br>
+            <span>{{ nome }}</span>
+        </p>
+        <p>{{  }}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                link: 'https://www.youtube.com/cod3rcursos',
+                nome: 'Jonathan S. Machado'
+            },
+
+            watch: {
+                nome(newValue) {
+                    const inputs = document.querySelectorAll('.input')
+                    inputs.forEach(input => input.style.backgroundColor = 'green')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

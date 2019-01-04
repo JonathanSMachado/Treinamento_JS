@@ -9,10 +9,132 @@
 </head>
 
 <body>
+    <div id="app">
+        <div class="container">
+            <h1 class="mt-3">{{ title }}</h1>
+            
+            <!-- TOTAIS -->
+            <div v-if="salesByProduct && !filteredSales" class="container-fluid">
+                <table class="mt-5 table">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Nome</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(sale, index) in salesByProduct">
+                            <td>#{{ index + 1 }}</td>
+                            <td>
+                                <a href="#" @click="filter = sale.name">{{ sale.name }}</a>
+                            </td>
+                            <td v-money="'R$'">{{ sale.value }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>+</td>
+                            <td>Total</td>
+                            <td v-money="'R$'">{{ calculateTotal(salesByProduct) }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- DETALHES -->
+            <div v-else class="container-fluid">
+                <div class="col-12 d-flex justify-content-end">
+                    <button class="btn btn-primary" @click="filter = null">VOLTAR</button>
+                </div>
+                <p class="lead">Produto: {{ filter }}</p>
+                <table class="mt-2 table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="sale in filteredSales">
+                            <td>{{ sale.id }} {{sale.name}}</td>
+                            <td v-money="'R$'">{{ sale.price }}</td>
+                            <td>{{ sale.qtde }}</td>
+                            <td>{{ sale.date }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // ...
+        Vue.directive('money', {
+            inserted(el, binding) {
+                const amount = parseFloat(el.innerHTML)
+                    .toFixed(2)
+                    .replace(".", ",")
+                    .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')
+
+                el.innerHTML = `${binding.value} ${amount}`
+            }
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                title: "Relatório de Vendas",
+                sales: null,
+                filter: null
+            },
+
+            methods: {
+                getSales() {
+                    fetch('data/sales.json')
+                        .then(response => response.json())
+                        .then(data => this.sales = data)
+                },
+
+                calculateTotal(sales) {
+                    return sales.reduce((total, sale) => total + sale.value, 0)
+                }
+            },
+
+            computed: {
+                salesByProduct() {
+                    if(!this.sales) return 0
+                    
+                    const salesByProduct = this.sales.reduce((groupped, sale) => {
+                        if(!groupped.hasOwnProperty(sale.name)) {
+                            groupped[sale.name] = {
+                                name: sale.name,
+                                value: sale.qtde * sale.price
+                            }
+
+                            return groupped
+                        }
+
+                        groupped[sale.name].value += sale.qtde * sale.price
+                        
+                        return groupped
+                    }, {})
+
+                    return Object.values(salesByProduct)
+                },
+
+                filteredSales() {
+                    if(!this.filter) return null
+
+                    return this.sales.filter(sale => sale.name === this.filter)
+                }
+            },
+            
+            mounted() {
+                this.getSales()
+            }
+        })
     </script>
 </body>
-
 </html>

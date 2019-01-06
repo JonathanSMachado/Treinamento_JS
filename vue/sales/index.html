@@ -29,14 +29,14 @@
                             <td>
                                 <a href="#" @click="filter = sale.name">{{ sale.name }}</a>
                             </td>
-                            <td v-money="'R$'">{{ sale.value }}</td>
+                            <td class="text-right" v-money="'R$'">{{ sale.value }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td>+</td>
                             <td>Total</td>
-                            <td v-money="'R$'">{{ calculateTotal(salesByProduct) }}</td>
+                            <td class="text-right" v-money="'R$'">{{ calculateTotal(salesByProduct) }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -58,10 +58,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="sale in filteredSales">
-                            <td>{{ sale.id }} {{sale.name}}</td>
-                            <td v-money="'R$'">{{ sale.price }}</td>
-                            <td>{{ sale.qtde }}</td>
+                        <tr v-for="sale in filteredSales" :key="sale.id">
+                            <td>{{ sale.id }}</td>
+                            <td class="text-right" v-money="'R$'">{{ sale.price }}</td>
+                            <td class="text-right">{{ sale.qtde }}</td>
                             <td>{{ sale.date }}</td>
                         </tr>
                     </tbody>
@@ -126,7 +126,7 @@
 
                 filteredSales() {
                     if(!this.filter) return null
-
+                    
                     return this.sales.filter(sale => sale.name === this.filter)
                 }
             },

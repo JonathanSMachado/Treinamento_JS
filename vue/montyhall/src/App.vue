@@ -1,23 +1,27 @@
 <template>
     <div id="app">
         <h1>Problema de Monty Hall</h1>
-        <Gift />
+        <Door number="1" :hasGift="false"/>
     </div>
 </template>
 
 <script>
-import Gift from './components/Gift'
+import Door from './components/Door'
 
 export default {
     name: 'App',
-    components: { Gift }
+    components: { Door }
 }
 </script>
 
 <style>
-    body {
+
+    * {
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
+    }
+    body {
+        color: #fff;
         background: linear-gradient(to right, #8e0e00, #1f1c18);
     }
 
@@ -27,11 +31,31 @@ export default {
         align-items: center;
     }
 
-    h1 {
-        border: 5px solid #0005;
+    #app h1 {
+        border: 1px solid #0005;
         padding: 20px;
         margin-bottom: 20px;
         color: #fff;
         background-color: #0005;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .form, .form input, .form button {
+        margin-bottom: 10px;
+        font-size: 2rem;
+    }
+
+    .doors {
+        align-self: stretch;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
     }
 </style>
